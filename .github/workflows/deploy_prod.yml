@@ -37,7 +37,7 @@ jobs:
         REGISTRY: ${{ steps.login-ecr-public.outputs.registry }}
         REGISTRY_ALIAS: l5l5u2o3
         REPOSITORY: bp-bible-beasts-ecr-repository
-        IMAGE_TAG: ${{ env.VERSION_NUMBER_WITH_OFFSET }}
+        IMAGE_TAG: "1.0.0"
       run: |
         docker build -t $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG .
         docker push $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG
