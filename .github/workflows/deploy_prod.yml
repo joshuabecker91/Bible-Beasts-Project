@@ -24,9 +24,15 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ secrets.AWS_REGION }}
     
-    - name: Login to Amazon ECR 
-      id: login-ecr
-      uses: aws-actions/amazon-ecr-login@v1
+    # - name: Login to Amazon ECR 
+    #   id: login-ecr
+    #   uses: aws-actions/amazon-ecr-login@v1
+    
+    - name: Login to Amazon ECR Public
+      id: login-ecr-public
+      uses: aws-actions/amazon-ecr-login@v2
+      with:
+        registry-type: public
 
     - name: create a custom version using run number offset by 1000 (run_number + 1000)
       run: |
