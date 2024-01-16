@@ -87,13 +87,13 @@ Best Regards,
 	RUN rm -rf node_modules && npm prune --production  
 
 ## **RESULTS:**  
-Our initial Docker Image on ECR on push was 677.79 MB  
-With the new Dockerfile changes implemented, the size was reduced to 444.33 MB.  
-OUTCOME: 34.44% reduction in size.  
+• Our initial Docker Image on ECR on push was 677.79 MB  
+• With the new Dockerfile changes implemented, the size was reduced to 444.33 MB.  
+• OUTCOME: 34.44% reduction in size.  
 
-Our initial Docker Image on local machine was 1.74 GB  
-With the new Dockerfile changes implemented, the size was reduced to 1.19 GB  
-OUTCOME: 31.6% reduction in size.  
+• Our initial Docker Image on local machine was 1.74 GB  
+• With the new Dockerfile changes implemented, the size was reduced to 1.19 GB  
+• OUTCOME: 31.6% reduction in size.  
 
 Build time was also reduced by a similar proportion.  
 
