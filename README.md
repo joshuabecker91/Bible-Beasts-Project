@@ -69,8 +69,8 @@ I've examined the repository and the provided Dockerfile for the Bible Beasts we
 
 Feel free to review the comments below at your convenience. I am eager to collaborate further to enhance the development experience. Should you have any questions or need assistance, please don't hesitate to reach out.
 
-Best Regards,
-Josh Becker
+Best Regards,  
+**Josh Becker**
 
 
 
