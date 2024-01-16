@@ -107,7 +107,7 @@ Build time was also reduced by a similar proportion.
 
 ## **10,000 ft view**  
 - Containerized our Application using Docker  
-- Pushed the Container to AWS ECR (We can use Github Container Repository for this if you are more comfortable using that)  
+- Pushed the Container to AWS ECR (We can use Github Container Repository moving forward if you prefer)  
 - Deployed via ECS Cluster using AWS Fargate  
 
 ## **Deployed our application on AWS ECS Fargate with Containerization via Docker.**     
