@@ -263,8 +263,10 @@ With more time, I would be interested in implementing other GitHub Actions, such
 
 **Observability - Setting up New Relic and automating** 
 GitHub Actions Workflow:   
-Create a .github/workflows/new-relic-deployment.yml file for your GitHub Actions workflow. Below is a sample workflow:  
-      - name: Notify New Relic  
+Create a .github/workflows/new-relic-deployment.yml file for your GitHub Actions workflow. 
+Below is a sample workflow:   
+
+      - name: Notify New Relic   
         run: |  
           curl -X POST "https://api.newrelic.com/v2/applications/APPLICATION_ID/deployments.json" \  
           -H "Api-Key:${{ secrets.NEW_RELIC_API_KEY }}" \  
