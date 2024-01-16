@@ -256,7 +256,7 @@ Periodically we can determine a stable version that we are satisfied with and ma
 
 
 ## **Notes on other CI / CD ideas**   
-With more time, I would be interested in implementing other GitHub Actions, such as:  
+With more time, I would be interested in implementing other GitHub Actions, such as:   
 
 **Observability - Setting up New Relic and automating** 
 GitHub Actions Workflow:   
