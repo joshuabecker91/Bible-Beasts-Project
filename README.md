@@ -61,7 +61,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 --------------------------------------------------------------------------------------------------------------
 
-Hi Spruce Bingsteen!
+## Hi Spruce Bingsteen!
 
 Thank you for reaching out; it's great to connect with you!
 
@@ -118,8 +118,8 @@ Why AWS Fargate? AWS Fargate is a great solution for our application because:
 • Security: AWS lacks built-in container security mechanisms; dedicated virtual machines are preferred.
 • Lowering Costs: Fargate manages infrastructure, reducing overall application costs.
 
-Here is the live IP address of the deployment:    
-http://13.52.61.169:3000/  
+Here is the live IP address of the deployment:     
+http://13.52.61.169:3000/   
 
 
 
