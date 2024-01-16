@@ -75,7 +75,7 @@ Best Regards,
 
 
 
-## **Docker Containerization Optimization** | TASK 1  
+# **Docker Containerization Optimization** | TASK 1  
 
 **Addressing Extended Build Times**  
 
@@ -100,7 +100,7 @@ Build time was also reduced by a similar proportion.
 
 
 
-## **AWS ECS Deployment with Containerization** | TASK 3  
+# **AWS ECS Deployment with Containerization** | TASK 3  
 
 **Comments about choice of technologies for deployment:**  
 - Due to our time restrictions with this deployment, being only 5 hours allotted - it was important to keep our architecture simple and easy to maintain.  
@@ -203,10 +203,10 @@ We could have both:
 - and the live production version   
 
 
-## **CI / CD** | TASK 2  
+# **CI / CD** | TASK 2  
 
 
-**Continuous Integration**  
+## **Continuous Integration**  
 Automation of the build and push of the Docker images to AWS ECR -    
 • I went ahead and set up the main branch on GitHub Repo to be Continuously Integrated.  
 • I've set up a GitHub workflow via .yml file to automate this process. Any time a pull request is pushed it will run though the .yml file and docker build to check for errors, and inform you whether or not it can be merged (triggering next step, docker build and ECR push).  
@@ -222,7 +222,7 @@ If you have any issue and need to roll back you can easily revert the change by 
 * ECS will automatically turn off the running instance(s) on Fargate that are running the old container image and spin up a new one(s) with the new container image.  
 
 
-**Continuous Deployment**  
+## **Continuous Deployment**  
 Automation of the deployment on AWS   
 With a bit more time I would be able to tackle adding the functionality for Automated Continuous Deployment.   
 *What I would do to complete this:   
