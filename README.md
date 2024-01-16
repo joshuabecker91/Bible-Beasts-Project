@@ -206,7 +206,8 @@ We could have both:
 ## **CI / CD** | TASK 2  
 
 
-**Continuous Integration** | Automation of the build and push of the Docker images to AWS ECR -   
+**Continuous Integration**  
+Automation of the build and push of the Docker images to AWS ECR -    
 • I went ahead and set up the main branch on GitHub Repo to be Continuously Integrated.  
 • I've set up a GitHub workflow via .yml file to automate this process. Any time a pull request is pushed it will run though the .yml file and docker build to check for errors, and inform you whether or not it can be merged (triggering next step, docker build and ECR push).  
 • Any time you change the main branch of your github repository, a new docker image is created and pushed to AWS ECR!  
@@ -221,7 +222,8 @@ If you have any issue and need to roll back you can easily revert the change by 
 * ECS will automatically turn off the running instance(s) on Fargate that are running the old container image and spin up a new one(s) with the new container image.  
 
 
-**Continuous Deployment** | Automation of the deployment on AWS   
+**Continuous Deployment**  
+Automation of the deployment on AWS   
 With a bit more time I would be able to tackle adding the functionality for Automated Continuous Deployment.   
 *What I would do to complete this:   
 Add GitHub actions in the .yml file that will automatically update the task definition and service on AWS for our AWS ECS Cluster    
@@ -232,13 +234,13 @@ GitHub Action: ECS Deploy Action.
 Use Case: Deploying a Docker container to ECS Fargate.   
 GitHub Marketplace: aws-actions/amazon-ecs-deploy-task-definition   
 
-or 
+or  
 GitHub Action: GitHub Actions for AWS:    
 Use Case: General AWS interactions and ECS deployments.   
 GitHub Marketplace: aws-actions/actions   
 
 
-**Notes on Versioning**  
+**Notes on Versioning**   
 Naming convention idea for workflow -   
 bp-project-name-team-versionORtag  
 - bp for bible project
