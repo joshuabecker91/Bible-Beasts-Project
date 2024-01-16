@@ -79,59 +79,59 @@ Best Regards,
 
 **Addressing Extended Build Times**  
 
-**Changes made to optimize the Dockerfile:**
-1. Specificity with regard to a specific and recent version of node, 18 is stable and alpine is smaller.
-2. Updated workdir to usr/src/app as best practice for next js apps
-3. Added a line to copy only necessary files needed for dependency installation
-4. Added a command that will clean up / remove unnecessary files in order to reduce image size
-	RUN rm -rf node_modules && npm prune --production
+**Changes made to optimize the Dockerfile:**  
+1. Specificity with regard to a specific and recent version of node, 18 is stable and alpine is smaller.  
+2. Updated workdir to usr/src/app as best practice for next js apps  
+3. Added a line to copy only necessary files needed for dependency installation  
+4. Added a command that will clean up / remove unnecessary files in order to reduce image size  
+	RUN rm -rf node_modules && npm prune --production  
 
-**RESULTS:**
-Our initial Docker Image on ECR on push was 677.79 MB
-With the new Dockerfile changes implemented, the size was reduced to 444.33 MB.
-OUTCOME: 34.44% reduction in size.
+**RESULTS:**  
+Our initial Docker Image on ECR on push was 677.79 MB  
+With the new Dockerfile changes implemented, the size was reduced to 444.33 MB.  
+OUTCOME: 34.44% reduction in size.  
 
-Our initial Docker Image on local machine was 1.74 GB
-With the new Dockerfile changes implemented, the size was reduced to 1.19 GB
-OUTCOME: 31.6% reduction in size.
+Our initial Docker Image on local machine was 1.74 GB  
+With the new Dockerfile changes implemented, the size was reduced to 1.19 GB  
+OUTCOME: 31.6% reduction in size.  
 
-Build time was also reduced by a similar proportion.
+Build time was also reduced by a similar proportion.  
 
 
 
 
 ## **AWS ECS Deployment with Containerization** | TASK 3  
 
-**Comments about choice of technologies for deployment:**
-- Due to our time restrictions with this deployment, being only 5 hours allotted - it was important to keep our architecture simple and easy to maintain. 
+**Comments about choice of technologies for deployment:**  
+- Due to our time restrictions with this deployment, being only 5 hours allotted - it was important to keep our architecture simple and easy to maintain.  
 
-**10,000 ft view**
-- Containerized our Application using Docker
-- Pushed the Container to AWS ECR (We can use Github Container Repository for this if you are more comfortable using that)
-- Deployed via ECS Cluster using AWS Fargate
+**10,000 ft view**  
+- Containerized our Application using Docker  
+- Pushed the Container to AWS ECR (We can use Github Container Repository for this if you are more comfortable using that)  
+- Deployed via ECS Cluster using AWS Fargate  
 
-**I opted to deploy our application on AWS ECS Fargate with Containerization via Docker.**   
-Why AWS Fargate? AWS Fargate is a great solution for our application because:
-• No Cluster Management: Fargate eliminates the need to manage EC2 Instances clusters for containers.
-• Seamless Scaling: No need to provision resources; scaling is based on defined app requirements.
-• Integration with Amazon ECS: Specify app requirements and policies, upload to Amazon ECS.
-• Security: AWS lacks built-in container security mechanisms; dedicated virtual machines are preferred.
-• Lowering Costs: Fargate manages infrastructure, reducing overall application costs.
-
+**I opted to deploy our application on AWS ECS Fargate with Containerization via Docker.**     
+Why AWS Fargate? AWS Fargate is a great solution for our application because:  
+• No Cluster Management: Fargate eliminates the need to manage EC2 Instances clusters for containers.  
+• Seamless Scaling: No need to provision resources; scaling is based on defined app requirements.  
+• Integration with Amazon ECS: Specify app requirements and policies, upload to Amazon ECS.  
+• Security: AWS lacks built-in container security mechanisms; dedicated virtual machines are preferred.  
+• Lowering Costs: Fargate manages infrastructure, reducing overall application costs.  
+  
 **Here is the live IP address of the deployment:**     
 http://13.52.61.169:3000/   
 
 
 
-**Here is a summary of the steps to perform an initial AWS ECS Deployment with Docker via AWS ECR**
+**Here is a summary of the steps to perform an initial AWS ECS Deployment with Docker via AWS ECR**  
 
 
-**1. Create Repository on AWS ECR for our Docker Image (public or private, I created a private one)**
+**1. Create Repository on AWS ECR for our Docker Image (public or private, I created a private one)**  
 Name: bp-bible-beasts-ecr-repository-private
 
 
-**2. Create Docker Image**  
-• Authenticate / Configure AWS in terminal via AWS CLI (or change permissions in ECR repo, less secure)
+**2. Create Docker Image**   
+• Authenticate / Configure AWS in terminal via AWS CLI (or change permissions in ECR repo, less secure)  
   - If issues with aws configure - install and use amazon-ecr-credential-helper to overcome the 2,500 character limit authentication in terminal issue. 
     https://github.com/awslabs/amazon-ecr-credential-helper
 Then perform the following commands / tasks -
@@ -144,61 +144,61 @@ Then perform the following commands / tasks -
 
 
 **3. Create a new ECS Cluster:**  
-Name: bp-bible-beasts-ecs-fargate
+Name: bp-bible-beasts-ecs-fargate  
 
 
 **4. Create a Task Definition:**  
-Name: bp-bible-beasts-ecs-fargate-task-definition
-Linux/X86_64  |  1 vCPU  |  3 GB Memory  |  ecsTaskExecutionRole
-Network Mode: awsvpc (has to be vpc for fargate)
-Enter Container Information -
-Container Name: bp-bible-beasts-ecr-repository-private
-Container Image URI: 661859176969.dkr.ecr.us-west-1.amazonaws.com/bp-bible-beasts-ecr-repository-private:latest
-Set Port Mapping Container Port 80 TCP HTTP
+Name: bp-bible-beasts-ecs-fargate-task-definition  
+Linux/X86_64  |  1 vCPU  |  3 GB Memory  |  ecsTaskExecutionRole  
+Network Mode: awsvpc (has to be vpc for fargate)  
+Enter Container Information -  
+Container Name: bp-bible-beasts-ecr-repository-private  
+Container Image URI: 661859176969.dkr.ecr.us-west-1.amazonaws.com/bp-bible-beasts-ecr-repository-private:latest  
+Set Port Mapping Container Port 80 TCP HTTP  
 
 
-**5. Create Service**  
-Application Type: Service (as apposed to a single task, this will make it easier for Continuous Deployment)
-Family: bp-bible-beasts-ecs-fargate-task-definition
-Service Name: bp-bible-beasts-ecs-fargate-service
-Desired Tasks: 1 (you can select as many as required, We can add auto scaling later)
-Network: Default VPC or create one
-Security Group: (Create new) bp-bible-beasts-ecs-fargate-sg 
-- Set Inbound Rules: All TCP Traffic from Anywhere and HTTP TCP 80 from Anywhere
-Public IP: Yes / Turned On
-Load Balancing: No (Off for now... would love to have several instances and have ALB with autoscaling in future)
+**5. Create Service**   
+Application Type: Service (as apposed to a single task, this will make it easier for Continuous Deployment)  
+Family: bp-bible-beasts-ecs-fargate-task-definition  
+Service Name: bp-bible-beasts-ecs-fargate-service  
+Desired Tasks: 1 (you can select as many as required, We can add auto scaling later)  
+Network: Default VPC or create one  
+Security Group: (Create new) bp-bible-beasts-ecs-fargate-sg   
+- Set Inbound Rules: All TCP Traffic from Anywhere and HTTP TCP 80 from Anywhere  
+Public IP: Yes / Turned On  
+Load Balancing: No (Off for now... would love to have several instances and have ALB with autoscaling in future)  
 
 
-**Notes about suggested future improvements**  
-I would like to revisit this and implement a load balancer to handle and distribute traffic. For example, we can set a minimum of 3 instances or however many appropriate, and set up autoscaling rules based on number of requests or if the average CPU usage exceeds 10% or some appropriate figure. This will be a great solution to increase our scalability and availability.
+**Notes about suggested future improvements**   
+I would like to revisit this and implement a load balancer to handle and distribute traffic. For example, we can set a minimum of 3 instances or however many appropriate, and set up autoscaling rules based on number of requests or if the average CPU usage exceeds 10% or some appropriate figure. This will be a great solution to increase our scalability and availability.  
 
 *For now we have a functional delivery, however in due time, and as we continue to grow - implementing these suggested improvements will become more and more important in order to best handle the increased load and traffic.
 
 **Notes about Load Balancing with example:**  
 - Here is a link to an nginx docker container that I launched from AWS ECR on ECS Fargate that is running 3 instances with a load balancer 
-• http://nginx-load-balancer-1865082610.us-west-1.elb.amazonaws.com/
+• http://nginx-load-balancer-1865082610.us-west-1.elb.amazonaws.com/  
 - The traffic is distributed to three different instances, making it capable of handling heavy traffic.
 - When we have the availability of time, let's revisit this conversation about these deployment improvements to our infrastructure that will make it more scalable to handle more users by using more sophisticated techniques. This will include multiple security groups to control traffic and allow us to easily implement an SSL certificate and not have to update domains via Route 53 as much of this will be streamlined.
 
 
-**Here is a diagram of what I am proposing:** 
+**Here is a diagram of what I am proposing:**  
 ![bp-bible-beasts-infrastructure](https://github.com/joshuabecker91/Bible-Beasts-Project/assets/98496684/229a943d-d247-4e71-9fe7-6ec6401763f7)
   
   
 **Notes about updating the application**
-If you wanted to UPDATE the application MANUALLY, this is how (I've created the Github Actions to automate this, which you will see below):
-1. Build the updated Docker image that you want to deploy
-2. Push the latest version Docker image with appropriate tag to ECR
-3. When you are ready to go live with the new image:
-	A. Update Task Definition (make a new revision) with the new URI that has the updated tag
-	B. Update the Service to point to the new revised task definition
-* ECS will automatically turn off the running instance(s) on Fargate that are running the old container image and spin up a new one(s) with the new container image.
+If you wanted to UPDATE the application MANUALLY, this is how (I've created the Github Actions to automate this, which you will see below):  
+1. Build the updated Docker image that you want to deploy  
+2. Push the latest version Docker image with appropriate tag to ECR  
+3. When you are ready to go live with the new image:  
+	A. Update Task Definition (make a new revision) with the new URI that has the updated tag  
+	B. Update the Service to point to the new revised task definition  
+* ECS will automatically turn off the running instance(s) on Fargate that are running the old container image and spin up a new one(s) with the new container image.  
 
 
-Comments and Ideas:
+Comments and Ideas:  
 We can create a separate staging branch as part of our workflow, even with its own ecs cluster as well (if that would be helpful).
 
-We could have both:
+We could have both:  
 - a build / source version deployed for the test team (or w/ automated test pipeline)
 - and the live production version 
 
