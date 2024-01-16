@@ -110,7 +110,7 @@ Build time was also reduced by a similar proportion.
 - Pushed the Container to AWS ECR (We can use Github Container Repository for this if you are more comfortable using that)  
 - Deployed via ECS Cluster using AWS Fargate  
 
-## **I opted to deploy our application on AWS ECS Fargate with Containerization via Docker.**     
+## **Deployed our application on AWS ECS Fargate with Containerization via Docker.**     
 Why AWS Fargate? AWS Fargate is a great solution for our application because:  
 • No Cluster Management: Fargate eliminates the need to manage EC2 Instances clusters for containers.  
 • Seamless Scaling: No need to provision resources; scaling is based on defined app requirements.  
