@@ -61,7 +61,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 --------------------------------------------------------------------------------------------------------------
 
-## Hi Spruce Bingsteen!
+# Hi Spruce Bingsteen!
 
 Thank you for reaching out; it's great to connect with you!
 
