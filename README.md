@@ -225,11 +225,12 @@ If you have any issue and need to roll back you can easily revert the change by 
 
 
 ## **Continuous Deployment**  
+
 **Automation of the deployment on AWS**   
 With a bit more time I would be able to tackle adding the functionality for Automated Continuous Deployment.   
-*What I would do to complete this:   
-Add GitHub actions in the .yml file that will automatically update the task definition and service on AWS for our AWS ECS Cluster    
-This will take care of continuous deployment for you. We actually want to update the existing task definition and service, or we can create new and delete the previous.  
+**What I would do to complete this:**   
+• Add GitHub actions in the .yml file that will automatically update the task definition and service on AWS for our AWS ECS Cluster    
+• This will take care of continuous deployment for you. We actually want to update the existing task definition and service, or we can create new and delete the previous.  
 
 Something like this would assist -    
 GitHub Action: ECS Deploy Action.    
@@ -245,8 +246,8 @@ GitHub Marketplace: aws-actions/actions
 ## **Notes on Versioning**   
 Naming convention idea for workflow -   
 bp-project-name-team-versionORtag  
-- bp for bible project
-- with this naming convention, you will know who was working on what and when making it easier to identify the root cause via debugging.  
+- bp for bible project  
+- with this naming convention, you will know who was working on what and when making it easier to identify the root cause via debugging.   
 
 With the continuous integration that was set up, these images are generated and pushed to ECR every time main branch is updated, so we will be able to roll back to any specific moment in time and have a lot of data to assist in finding issues if something went wrong and what caused it.  
 We would have: The project, team, version / tag, as well as a timestamp.  
@@ -255,9 +256,9 @@ Periodically we can determine a stable version that we are satisfied with and ma
 
 
 ## **Notes on other CI / CD ideas**   
-Time permitting, I would be interested in implementing other GitHub Actions, such as:  
-• Observability - Setting up New Relic and automating  
+With more time, I would be interested in implementing other GitHub Actions, such as:  
 
+**Observability - Setting up New Relic and automating** 
 GitHub Actions Workflow:   
 Create a .github/workflows/new-relic-deployment.yml file for your GitHub Actions workflow. Below is a sample workflow:  
       - name: Notify New Relic  
