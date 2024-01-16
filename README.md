@@ -77,7 +77,7 @@ Best Regards,
 
 # **Docker Containerization Optimization** | TASK 1  
 
-**Addressing Extended Build Times**  
+## **Addressing Extended Build Times**  
 
 **Changes made to optimize the Dockerfile:**  
 1. Specificity with regard to a specific and recent version of node, 18 is stable and alpine is smaller.  
@@ -86,7 +86,7 @@ Best Regards,
 4. Added a command that will clean up / remove unnecessary files in order to reduce image size  
 	RUN rm -rf node_modules && npm prune --production  
 
-**RESULTS:**  
+## **RESULTS:**  
 Our initial Docker Image on ECR on push was 677.79 MB  
 With the new Dockerfile changes implemented, the size was reduced to 444.33 MB.  
 OUTCOME: 34.44% reduction in size.  
@@ -102,15 +102,15 @@ Build time was also reduced by a similar proportion.
 
 # **AWS ECS Deployment with Containerization** | TASK 3  
 
-**Comments about choice of technologies for deployment:**  
+## **Comments about choice of technologies for deployment:**  
 - Due to our time restrictions with this deployment, being only 5 hours allotted - it was important to keep our architecture simple and easy to maintain.  
 
-**10,000 ft view**  
+## **10,000 ft view**  
 - Containerized our Application using Docker  
 - Pushed the Container to AWS ECR (We can use Github Container Repository for this if you are more comfortable using that)  
 - Deployed via ECS Cluster using AWS Fargate  
 
-**I opted to deploy our application on AWS ECS Fargate with Containerization via Docker.**     
+## **I opted to deploy our application on AWS ECS Fargate with Containerization via Docker.**     
 Why AWS Fargate? AWS Fargate is a great solution for our application because:  
 • No Cluster Management: Fargate eliminates the need to manage EC2 Instances clusters for containers.  
 • Seamless Scaling: No need to provision resources; scaling is based on defined app requirements.  
@@ -118,7 +118,7 @@ Why AWS Fargate? AWS Fargate is a great solution for our application because:
 • Security: AWS lacks built-in container security mechanisms; dedicated virtual machines are preferred.  
 • Lowering Costs: Fargate manages infrastructure, reducing overall application costs.  
   
-**Here is the live IP address of the deployment:**     
+## **Here is the live IP address of the deployment:**     
 http://13.52.61.169:3000/   
 
 
@@ -169,12 +169,12 @@ Public IP: Yes / Turned On
 Load Balancing: No (Off for now... would love to have several instances and have ALB with autoscaling in future)  
 
 
-**Notes about suggested future improvements**   
+## **Notes about suggested future improvements**   
 I would like to revisit this and implement a load balancer to handle and distribute traffic. For example, we can set a minimum of 3 instances or however many appropriate, and set up autoscaling rules based on number of requests or if the average CPU usage exceeds 10% or some appropriate figure. This will be a great solution to increase our scalability and availability.  
 
 *For now we have a functional delivery, however in due time, and as we continue to grow - implementing these suggested improvements will become more and more important in order to best handle the increased load and traffic.
 
-**Notes about Load Balancing with example:**  
+## **Notes about Load Balancing with example:**  
 - Here is a link to an nginx docker container that I launched from AWS ECR on ECS Fargate that is running 3 instances with a load balancer 
 • http://nginx-load-balancer-1865082610.us-west-1.elb.amazonaws.com/  
 - The traffic is distributed to three different instances, making it capable of handling heavy traffic.
@@ -182,10 +182,12 @@ I would like to revisit this and implement a load balancer to handle and distrib
 
 
 **Here is a diagram of what I am proposing:**  
+  
 ![bp-bible-beasts-infrastructure](https://github.com/joshuabecker91/Bible-Beasts-Project/assets/98496684/229a943d-d247-4e71-9fe7-6ec6401763f7)
   
-  
-**Notes about updating the application**  
+
+   
+## **Notes about updating the application**  
 If you wanted to UPDATE the application MANUALLY, this is how (I've created the Github Actions to automate this, which you will see below):    
 1. Build the updated Docker image that you want to deploy    
 2. Push the latest version Docker image with appropriate tag to ECR    
@@ -195,10 +197,10 @@ If you wanted to UPDATE the application MANUALLY, this is how (I've created the 
 * ECS will automatically turn off the running instance(s) on Fargate that are running the old container image and spin up a new one(s) with the new container image.  
 
 
-Comments and Ideas:  
+**Comments and Ideas:**  
 We can create a separate staging branch as part of our workflow, even with its own ecs cluster as well (if that would be helpful).  
 
-We could have both:   
+**We could have both:**  
 - a build / source version deployed for the test team (or w/ automated test pipeline)  
 - and the live production version   
 
@@ -207,14 +209,14 @@ We could have both:
 
 
 ## **Continuous Integration**  
-Automation of the build and push of the Docker images to AWS ECR -    
+**Automation of the build and push of the Docker images to AWS ECR -**    
 • I went ahead and set up the main branch on GitHub Repo to be Continuously Integrated.  
 • I've set up a GitHub workflow via .yml file to automate this process. Any time a pull request is pushed it will run though the .yml file and docker build to check for errors, and inform you whether or not it can be merged (triggering next step, docker build and ECR push).  
 • Any time you change the main branch of your github repository, a new docker image is created and pushed to AWS ECR!  
 - Versioning Starts at 1000 and counts up automatically based on the activity in the Git Repository  
 - If you run into an issue, you can roll back to the last stable version # by simple updating the task definition's assigned container image's tag and update the service to point to the new task definition's revision.  
 
-Deployment -  
+**Deployment -**  
 Any time that you want to go live with the latest version you just simply:  
 	A. Update Task Definition (make a new revision) with the new URI that has the updated tag  
 	B. Update the Service to point to the new revised task definition  
@@ -223,7 +225,7 @@ If you have any issue and need to roll back you can easily revert the change by 
 
 
 ## **Continuous Deployment**  
-Automation of the deployment on AWS   
+**Automation of the deployment on AWS**   
 With a bit more time I would be able to tackle adding the functionality for Automated Continuous Deployment.   
 *What I would do to complete this:   
 Add GitHub actions in the .yml file that will automatically update the task definition and service on AWS for our AWS ECS Cluster    
@@ -240,7 +242,7 @@ Use Case: General AWS interactions and ECS deployments.
 GitHub Marketplace: aws-actions/actions   
 
 
-**Notes on Versioning**   
+## **Notes on Versioning**   
 Naming convention idea for workflow -   
 bp-project-name-team-versionORtag  
 - bp for bible project
@@ -252,7 +254,7 @@ We would have: The project, team, version / tag, as well as a timestamp.
 Periodically we can determine a stable version that we are satisfied with and make note of that release with a major naming convention like 10.0.0  
 
 
-**Notes on other CI / CD ideas**   
+## **Notes on other CI / CD ideas**   
 Time permitting, I would be interested in implementing other GitHub Actions, such as:  
 • Observability - Setting up New Relic and automating  
 
