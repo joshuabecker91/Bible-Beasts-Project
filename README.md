@@ -209,23 +209,24 @@ We can create a separate staging branch as part of our workflow, even with its o
 
 
 ## **Continuous Integration**  
+  
 **Automation of the build and push of the Docker images to AWS ECR -**    
 • I went ahead and set up the main branch on GitHub Repo to be Continuously Integrated.  
 • I've set up a GitHub workflow via .yml file to automate this process. Any time a pull request is pushed it will run though the .yml file and docker build to check for errors, and inform you whether or not it can be merged (triggering next step, docker build and ECR push).  
 • Any time you change the main branch of your github repository, a new docker image is created and pushed to AWS ECR!  
-- Versioning Starts at 1000 and counts up automatically based on the activity in the Git Repository  
-- If you run into an issue, you can roll back to the last stable version # by simple updating the task definition's assigned container image's tag and update the service to point to the new task definition's revision.  
+• Versioning Starts at 1000 and counts up automatically based on the activity in the Git Repository  
+• If you run into an issue, you can roll back to the last stable version # by simple updating the task definition's assigned container image's tag and update the service to point to the new task definition's revision.  
 
 **Deployment -**  
 Any time that you want to go live with the latest version you just simply:  
 	A. Update Task Definition (make a new revision) with the new URI that has the updated tag  
 	B. Update the Service to point to the new revised task definition  
-If you have any issue and need to roll back you can easily revert the change by doing Steps A & B again by selecting the rollback image you want.  
+• If you have any issue and need to roll back you can easily revert the change by doing Steps A & B again by selecting the rollback image you want.  
 * ECS will automatically turn off the running instance(s) on Fargate that are running the old container image and spin up a new one(s) with the new container image.  
 
 
 ## **Continuous Deployment**  
-
+  
 **Automation of the deployment on AWS**   
 With a bit more time I would be able to tackle adding the functionality for Automated Continuous Deployment.   
 **What I would do to complete this:**   
