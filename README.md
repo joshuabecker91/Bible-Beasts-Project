@@ -86,7 +86,7 @@ Best Regards,
 4. Added a command that will clean up / remove unnecessary files in order to reduce image size  
 	RUN rm -rf node_modules && npm prune --production  
 
-## **RESULTS:**  
+## **Results:**  
 • Our initial Docker Image on ECR on push was 677.79 MB  
 • With the new Dockerfile changes implemented, the size was reduced to 444.33 MB.  
 • OUTCOME: 34.44% reduction in size.  
