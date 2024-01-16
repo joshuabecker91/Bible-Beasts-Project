@@ -118,12 +118,12 @@ Why AWS Fargate? AWS Fargate is a great solution for our application because:
 • Security: AWS lacks built-in container security mechanisms; dedicated virtual machines are preferred.  
 • Lowering Costs: Fargate manages infrastructure, reducing overall application costs.  
   
-## **Here is the live IP address of the deployment:**     
+## **Live IP address of the deployment:**     
 http://13.52.61.169:3000/   
 
 
 
-**Here is a summary of the steps to perform an initial AWS ECS Deployment with Docker via AWS ECR**  
+**Summary of the steps to perform an initial AWS ECS Deployment with Docker via AWS ECR**  
 
 
 **1. Create Repository on AWS ECR for our Docker Image (public or private, I created a private one)**  
@@ -181,7 +181,7 @@ I would like to revisit this and implement a load balancer to handle and distrib
 - When we have the availability of time, let's revisit this conversation about these deployment improvements to our infrastructure that will make it more scalable to handle more users by using more sophisticated techniques. This will include multiple security groups to control traffic and allow us to easily implement an SSL certificate and not have to update domains via Route 53 as much of this will be streamlined.
 
 
-**Here is a diagram of what I am proposing:**  
+**Diagram of what I am proposing:**  
   
 ![bp-bible-beasts-infrastructure](https://github.com/joshuabecker91/Bible-Beasts-Project/assets/98496684/229a943d-d247-4e71-9fe7-6ec6401763f7)
   
