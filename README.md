@@ -75,7 +75,7 @@ Josh Becker
 
 
 
-**Docker Containerization Optimization** | TASK 1 ------------------------------------------------------------
+## **Docker Containerization Optimization** | TASK 1 ------------------------------------------------------------
 
 Addressing Extended Build Times
 
@@ -100,7 +100,7 @@ Build time was also reduced by a similar proportion.
 
 
 
-**AWS ECS Deployment with Containerization** | TASK 3 --------------------------------------------------------
+## **AWS ECS Deployment with Containerization** | TASK 3 --------------------------------------------------------
 
 Comments about choice of technologies for deployment:
 - Due to our time restrictions with this deployment, being only 5 hours allotted - it was important to keep our architecture simple and easy to maintain. 
@@ -180,6 +180,11 @@ I would like to revisit this and implement a load balancer to handle and distrib
 - The traffic is distributed to three different instances, making it capable of handling heavy traffic.
 - When we have the availability of time, let's revisit this conversation about these deployment improvements to our infrastructure that will make it more scalable to handle more users by using more sophisticated techniques. This will include multiple security groups to control traffic and allow us to easily implement an SSL certificate and not have to update domains via Route 53 as much of this will be streamlined.
 
+
+Here is a diagram of what I am proposing:
+![bp-bible-beasts-infrastructure](https://github.com/joshuabecker91/Bible-Beasts-Project/assets/98496684/229a943d-d247-4e71-9fe7-6ec6401763f7)
+
+
 **Notes about updating the application**
 If you wanted to UPDATE the application MANUALLY, this is how (I've created the Github Actions to automate this, which you will see below):
 1. Build the updated Docker image that you want to deploy
@@ -198,7 +203,7 @@ We could have both:
 - and the live production version 
 
 
-**CI / CD** | TASK 2 ------------------------------------------------------------
+## **CI / CD** | TASK 2 ---------------------------------------------------------------------------------------
 
 
 **Continuous Integration** | Automation of the build and push of the Docker images to AWS ECR -
