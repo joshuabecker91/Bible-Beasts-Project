@@ -27,19 +27,32 @@ jobs:
     - name: Login to Amazon ECR 
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v2
-      with:
-        mask-password: 'true'
+      # with:
+      #   mask-password: 'true'
 
     - name: create a custom version using run number offset by 1000 (run_number + 1000)
       run: |
         echo "VERSION_NUMBER_WITH_OFFSET=$((1000+GITHUB_RUN_NUMBER))" >> $GITHUB_ENV
 
+
+    # Private Repo
     - name: Build, tag, and push docker image to Amazon ECR Public
       env:
-        REGISTRY: public.ecr.aws   # ${{ steps.login-ecr-public.outputs.registry }}
-        REGISTRY_ALIAS: l5l5u2o3
-        REPOSITORY: bp-bible-beasts-ecr-repository
+        REGISTRY: 661859176969.dkr.ecr.us-west-1.amazonaws.com
+        REPOSITORY: bp-bible-beasts-ecr-repository-private
         IMAGE_TAG: ${{ env.VERSION_NUMBER_WITH_OFFSET }}
       run: |
-        docker build -t $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG .
-        docker push $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG
+        docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
+        docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+
+
+    # Public Repo - Requires Permissions to Push on ECR
+    # - name: Build, tag, and push docker image to Amazon ECR Public
+    #   env:
+    #     REGISTRY: public.ecr.aws   # ${{ steps.login-ecr-public.outputs.registry }}
+    #     REGISTRY_ALIAS: l5l5u2o3
+    #     REPOSITORY: bp-bible-beasts-ecr-repository
+    #     IMAGE_TAG: ${{ env.VERSION_NUMBER_WITH_OFFSET }}
+    #   run: |
+    #     docker build -t $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG .
+    #     docker push $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG
